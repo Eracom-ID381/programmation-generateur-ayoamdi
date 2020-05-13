@@ -1,23 +1,30 @@
 // ----------------- GÉNÉRATEUR --------------------------- //
 
 // une unité = 1 seconde
-let timer = 1;
+let timer = 0.25;
 let words = ['apple', 'bear', 'cat', 'dog'];
+let counterX = 0;
+let counterY = 0;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     rectMode(CENTER);
+
 }
 
 function draw() {
+
     // Conditionellle nous permettant de savoir si la souris est appuyée
     // et si le timer est écoulé
     if (frameCount % (timer * 60) == 0 && !mouseIsPressed) {
+        counterX += 1;
         // Appel de notre fonction generator
         //generator1(width / 2, height / 2, height - 400);
-        generator2(10, 10);
+        generator2();
+        uncube();
         // generator2(random(innerWidth), random(innerHeight));
     }
+
 }
 
 // Fonction avec quatres paramètres
@@ -31,13 +38,43 @@ function draw() {
 //     }
 // }
 
-function generator2(x, y) {
-    for (let x = 0; x < width; x = x + 5) {
-        for (let y = 0; y < width; y = y + 5), 50) {
-        fill(255, 255, 255);
-        rect(x, y, 20, 20);
+function generator2() {
+    let x = 40 * counterX * 5;
+    let y = 40 * counterY * 5;
+    rect(x, y, 30, 30);
+
+    if (x > width) {
+        counterY += 1;
+        counterX = 0;
     }
+    console.log(x);
 }
+
+function uncube() {
+    rectMode(CENTER);
+    noStroke();
+
+    fill(255, 0, 0);
+    rect(width / 2, height / 2, 50, 50);
+    //rect(x, y, sizeCubeFace, sizeCubeFace);
+
+    fill(255, 255, 0);
+    triangle(width / 2 - 25, height / 2 - 25, width / 2 + 25, height / 2 - 25,
+        width / 2 + 40, height / 2 - 40);
+    //triangle(x - sizeCubeFace/2, y - sizeCubeFace/2, x + sizeCubeFace/2, y - sizeCubeFace/2, x + profondeurCube, y - profondeurCube);
+
+    fill(255, 255, 0);
+    triangle(width / 2 - 25, height / 2 - 25, width / 2 - 15, height / 2 - 40, width / 2 + 35, height / 2 - 40);
+    //triangle(x - sizeCubeFace/2, y - sizeCubeFace/2, x - 15, y - 40, x + 35, y - 40);
+
+    fill(255, 150, 76);
+    triangle(width / 2 + 25, height / 2 - 25, width / 2 + 40, height / 2 - 40, width / 2 + 25, height / 2 + 25);
+    //triangle(x + 25, y - 25, x + 40, y - 40, x + 25, y + 25);
+
+    fill(255, 150, 76);
+    triangle(width / 2 + 40, height / 2 + 15, width / 2 + 40, height / 2 - 40, width / 2 + 25, height / 2 + 25);
+    //triangle(x + 40, y + 15, x + 40, y - 40, x + 25, y + 25);
+
 }
 
 
