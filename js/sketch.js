@@ -14,7 +14,7 @@ function setup() {
 }
 
 function draw() {
-    background(0, 0, 0);
+
     let sizeCubeFace = random(face);
 
     // Conditionellle nous permettant de savoir si la souris est appuyée
