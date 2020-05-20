@@ -15,6 +15,7 @@ function setup() {
 }
 
 function draw() {
+    background(0, 0, 0);
     let sizeCubeFace = random(face);
 
     // Conditionellle nous permettant de savoir si la souris est appuyée
@@ -43,7 +44,7 @@ function draw() {
 function generator2(profondeurCube) {
     let sizeCubeFace = random(face);
     let sizeCubeCote = sizeCubeFace / 2;
-    let x = 40 * counterX * 5;
+    let x = 20 * counterX * 5;
     let y = 40 * counterY * 5;
 
     if (x > width) {
@@ -56,7 +57,7 @@ function generator2(profondeurCube) {
     //noStroke();
 
     //carré//
-    fill(255, 0, 0);
+    fill(255, 255, 255);
     //rect(width / 2, height / 2, 50, 50);
     rect(x, y, sizeCubeFace, sizeCubeFace);
 
@@ -76,12 +77,12 @@ function generator2(profondeurCube) {
         x - sizeCubeCote - profondeurCube, y - sizeCubeCote + profondeurCube);
 
     //triangle droite regarde vers le haut//
-    fill(255, 150, 76);
+    fill(40, 33, 255);
     //triangle(width / 2 + 25, height / 2 - 25, width / 2 + 40, height / 2 - 40, width / 2 + 25, height / 2 + 25);
     triangle(x + sizeCubeCote, y - sizeCubeCote,
         x + sizeCubeCote + profondeurCube, y - sizeCubeCote + profondeurCube, x + sizeCubeCote, y + sizeCubeCote);
 
-    fill(255, 150, 76);
+    fill(40, 33, 225);
     //triangle(width / 2 + 40, height / 2 + 5, width / 2 + 40, height / 2 - 40, width / 2 + 25, height / 2 + 25);
     triangle(x + sizeCubeCote + profondeurCube, y + sizeCubeCote + sizeCubeCote - profondeurCube,
         x + sizeCubeCote, y + sizeCubeCote,
