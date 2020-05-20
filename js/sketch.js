@@ -2,6 +2,7 @@
 
 // une unité = 1 seconde
 let timer = 1;
+let mezon;
 //let words = ['apple', 'bear', 'cat', 'dog'];
 
 let face = ['10', '20', '30', '40', '60', '80', '90'];
@@ -9,7 +10,7 @@ let face = ['10', '20', '30', '40', '60', '80', '90'];
 function setup() {
 
     createCanvas(window.innerWidth, window.innerHeight);
-    rectMode(CENTER);
+    mezon = new Mezon(width / 2, height / 2, random(5, 50));
 
 }
 
@@ -17,15 +18,17 @@ function draw() {
 
     let sizeCubeFace = random(face);
 
+
     // Conditionellle nous permettant de savoir si la souris est appuyée
     // et si le timer est écoulé
     if (frameCount % (timer * 60) == 0 && !mouseIsPressed) {
-
-        // Appel de notre fonction generator
-        generator2(width / 2, height / 2, random(5, 50));
-        //uncube();
-
+        mezon.afficher();
     }
+    // Appel de notre fonction generator
+    //generator2(width / 2, height / 2, random(5, 50));
+    //uncube();
+
+
 }
 
 // Fonction avec quatres paramètres
@@ -39,50 +42,67 @@ function draw() {
 //     }
 // }
 
-function generator2(x, y, profondeurCube) {
-    let sizeCubeFace = random(face);
-    let sizeCubeCote = sizeCubeFace / 2;
-    for (let offset = sizeCubeFace; offset > 0; offset -= 10) {
+// function generator2(x, y, profondeurCube) {
+//
+//     for (let offset = sizeCubeFace; offset > 0; offset -= 10) {
+//
+//         //console.log(x);
+//
+//
+//     }
 
-        //console.log(x);
+class Mezon {
+    constructor(x, y, profondeurCube) {
+        this.x = x;
+        this.y = y;
+        this.profondeurCube = profondeurCube;
 
+    }
+    afficher() {
+        let sizeCubeFace = random(face);
+        let sizeCubeCote = sizeCubeFace / 2;
         rectMode(CENTER);
         //noStroke();
 
         //carré//
         fill(255, 255, 255);
         //rect(width / 2, height / 2, 50, 50);
-        rect(x, y, sizeCubeFace, sizeCubeFace);
+        rect(this.x, this.y, sizeCubeFace, sizeCubeFace);
 
         //triangle haut droite//
         fill(255, 255, 0);
         //triangle(width / 2 - 25, height / 2 - 25, width / 2 + 25, height / 2 - 25,
         //    width / 2 + 40, height / 2 - 40);
-        triangle(x - sizeCubeCote, y - sizeCubeCote,
-            x + sizeCubeCote, y - sizeCubeCote,
-            x + sizeCubeCote + profondeurCube, y - sizeCubeCote + profondeurCube);
+        triangle(this.x - sizeCubeCote, this.y - sizeCubeCote,
+            this.x + sizeCubeCote, this.y - sizeCubeCote,
+            this.x + sizeCubeCote + this.profondeurCube, this.y - sizeCubeCote + this.profondeurCube);
 
         //triangle haut gauche//
         fill(255, 255, 0);
         //triangle(width / 2 - 25, height / 2 - 25, width / 2 - 5, height / 2 - 40, width / 2 + 40, height / 2 - 40);
-        triangle(x - sizeCubeCote, y - sizeCubeCote,
-            x + sizeCubeCote + profondeurCube, y - sizeCubeCote + profondeurCube,
-            x - sizeCubeCote - profondeurCube, y - sizeCubeCote + profondeurCube);
+        triangle(this.x - sizeCubeCote, this.y - sizeCubeCote,
+            this.x + sizeCubeCote + this.profondeurCube, this.y - sizeCubeCote + this.profondeurCube,
+            this.x - sizeCubeCote - this.profondeurCube, this.y - sizeCubeCote + this.profondeurCube);
 
         //triangle droite regarde vers le haut//
         fill(40, 33, 255);
         //triangle(width / 2 + 25, height / 2 - 25, width / 2 + 40, height / 2 - 40, width / 2 + 25, height / 2 + 25);
-        triangle(x + sizeCubeCote, y - sizeCubeCote,
-            x + sizeCubeCote + profondeurCube, y - sizeCubeCote + profondeurCube, x + sizeCubeCote, y + sizeCubeCote);
+        triangle(this.x + sizeCubeCote, this.y - sizeCubeCote,
+            this.x + sizeCubeCote + this.profondeurCube, this.y - sizeCubeCote + this.profondeurCube, this.x + sizeCubeCote, this.y + sizeCubeCote);
 
         fill(40, 33, 225);
         //triangle(width / 2 + 40, height / 2 + 5, width / 2 + 40, height / 2 - 40, width / 2 + 25, height / 2 + 25);
-        triangle(x + sizeCubeCote + profondeurCube, y + sizeCubeCote + sizeCubeCote - profondeurCube,
-            x + sizeCubeCote, y + sizeCubeCote,
-            x + sizeCubeCote + profondeurCube, y + sizeCubeCote - profondeurCube);
+        triangle(this.x + sizeCubeCote + this.profondeurCube, this.y + sizeCubeCote + sizeCubeCote - this.profondeurCube,
+            this.x + sizeCubeCote, this.y + sizeCubeCote,
+            this.x + sizeCubeCote + this.profondeurCube, this.y + sizeCubeCote - this.profondeurCube);
+
+
 
     }
 }
+
+
+
 
 //function uncube() {
 
