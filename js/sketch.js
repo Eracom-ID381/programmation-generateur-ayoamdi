@@ -1,11 +1,10 @@
 // ----------------- GÉNÉRATEUR --------------------------- //
 
 // une unité = 1 seconde
-let timer = 0.7;
+let timer = 1;
 //let words = ['apple', 'bear', 'cat', 'dog'];
-let counterX = 0;
-let counterY = 0;
-let face = ['10', '20', '30', '40']
+
+let face = ['10', '20', '30', '40', '60', '80', '90'];
 
 function setup() {
 
@@ -21,10 +20,9 @@ function draw() {
     // Conditionellle nous permettant de savoir si la souris est appuyée
     // et si le timer est écoulé
     if (frameCount % (timer * 60) == 0 && !mouseIsPressed) {
-        counterX += 1;
+
         // Appel de notre fonction generator
-        //generator1(width / 2, height / 2, height - 400);
-        generator2(random(5, 50));
+        generator2(width / 2, height / 2, random(5, 50));
         //uncube();
 
     }
@@ -41,53 +39,49 @@ function draw() {
 //     }
 // }
 
-function generator2(profondeurCube) {
+function generator2(x, y, profondeurCube) {
     let sizeCubeFace = random(face);
     let sizeCubeCote = sizeCubeFace / 2;
-    let x = 20 * counterX * 5;
-    let y = 40 * counterY * 5;
+    for (let offset = sizeCubeFace; offset > 0; offset -= 10) {
 
-    if (x > width) {
-        counterY += 1;
-        counterX = 0;
+        //console.log(x);
+
+        rectMode(CENTER);
+        //noStroke();
+
+        //carré//
+        fill(255, 255, 255);
+        //rect(width / 2, height / 2, 50, 50);
+        rect(x, y, sizeCubeFace, sizeCubeFace);
+
+        //triangle haut droite//
+        fill(255, 255, 0);
+        //triangle(width / 2 - 25, height / 2 - 25, width / 2 + 25, height / 2 - 25,
+        //    width / 2 + 40, height / 2 - 40);
+        triangle(x - sizeCubeCote, y - sizeCubeCote,
+            x + sizeCubeCote, y - sizeCubeCote,
+            x + sizeCubeCote + profondeurCube, y - sizeCubeCote + profondeurCube);
+
+        //triangle haut gauche//
+        fill(255, 255, 0);
+        //triangle(width / 2 - 25, height / 2 - 25, width / 2 - 5, height / 2 - 40, width / 2 + 40, height / 2 - 40);
+        triangle(x - sizeCubeCote, y - sizeCubeCote,
+            x + sizeCubeCote + profondeurCube, y - sizeCubeCote + profondeurCube,
+            x - sizeCubeCote - profondeurCube, y - sizeCubeCote + profondeurCube);
+
+        //triangle droite regarde vers le haut//
+        fill(40, 33, 255);
+        //triangle(width / 2 + 25, height / 2 - 25, width / 2 + 40, height / 2 - 40, width / 2 + 25, height / 2 + 25);
+        triangle(x + sizeCubeCote, y - sizeCubeCote,
+            x + sizeCubeCote + profondeurCube, y - sizeCubeCote + profondeurCube, x + sizeCubeCote, y + sizeCubeCote);
+
+        fill(40, 33, 225);
+        //triangle(width / 2 + 40, height / 2 + 5, width / 2 + 40, height / 2 - 40, width / 2 + 25, height / 2 + 25);
+        triangle(x + sizeCubeCote + profondeurCube, y + sizeCubeCote + sizeCubeCote - profondeurCube,
+            x + sizeCubeCote, y + sizeCubeCote,
+            x + sizeCubeCote + profondeurCube, y + sizeCubeCote - profondeurCube);
+
     }
-    //console.log(x);
-
-    rectMode(CENTER);
-    //noStroke();
-
-    //carré//
-    fill(255, 255, 255);
-    //rect(width / 2, height / 2, 50, 50);
-    rect(x, y, sizeCubeFace, sizeCubeFace);
-
-    //triangle haut droite//
-    fill(255, 255, 0);
-    //triangle(width / 2 - 25, height / 2 - 25, width / 2 + 25, height / 2 - 25,
-    //    width / 2 + 40, height / 2 - 40);
-    triangle(x - sizeCubeCote, y - sizeCubeCote,
-        x + sizeCubeCote, y - sizeCubeCote,
-        x + sizeCubeCote + profondeurCube, y - sizeCubeCote + profondeurCube);
-
-    //triangle haut gauche//
-    fill(255, 255, 0);
-    //triangle(width / 2 - 25, height / 2 - 25, width / 2 - 5, height / 2 - 40, width / 2 + 40, height / 2 - 40);
-    triangle(x - sizeCubeCote, y - sizeCubeCote,
-        x + sizeCubeCote + profondeurCube, y - sizeCubeCote + profondeurCube,
-        x - sizeCubeCote - profondeurCube, y - sizeCubeCote + profondeurCube);
-
-    //triangle droite regarde vers le haut//
-    fill(40, 33, 255);
-    //triangle(width / 2 + 25, height / 2 - 25, width / 2 + 40, height / 2 - 40, width / 2 + 25, height / 2 + 25);
-    triangle(x + sizeCubeCote, y - sizeCubeCote,
-        x + sizeCubeCote + profondeurCube, y - sizeCubeCote + profondeurCube, x + sizeCubeCote, y + sizeCubeCote);
-
-    fill(40, 33, 225);
-    //triangle(width / 2 + 40, height / 2 + 5, width / 2 + 40, height / 2 - 40, width / 2 + 25, height / 2 + 25);
-    triangle(x + sizeCubeCote + profondeurCube, y + sizeCubeCote + sizeCubeCote - profondeurCube,
-        x + sizeCubeCote, y + sizeCubeCote,
-        x + sizeCubeCote + profondeurCube, y + sizeCubeCote - profondeurCube);
-
 }
 
 //function uncube() {
