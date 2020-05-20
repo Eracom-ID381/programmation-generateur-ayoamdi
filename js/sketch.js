@@ -1,7 +1,7 @@
 // ----------------- GÉNÉRATEUR --------------------------- //
 
 // une unité = 1 seconde
-let timer = 0.25;
+let timer = 0.7;
 //let words = ['apple', 'bear', 'cat', 'dog'];
 let counterX = 0;
 let counterY = 0;
